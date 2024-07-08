@@ -11,7 +11,6 @@ import com.gestionBiblioteca.gestionB.domain.entities.UserEntity;
 public interface UserMapper {
 
   @Mapping(target = "id", ignore = true)
-
   UserEntity toUSer(UserRQ userRequest);
 
   UserResponse toUserResponse(UserEntity userEntity);

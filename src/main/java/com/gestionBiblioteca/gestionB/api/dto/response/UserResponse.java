@@ -3,12 +3,10 @@ package com.gestionBiblioteca.gestionB.api.dto.response;
 import com.gestionBiblioteca.gestionB.utils.enums.Role;
 
 import lombok.AllArgsConstructor;
-import lombok.Getter;
+import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
-@Getter
-@Setter
+@Data
 @AllArgsConstructor
 @NoArgsConstructor
 public class UserResponse {
