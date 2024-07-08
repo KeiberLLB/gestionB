@@ -5,6 +5,7 @@ import com.gestionBiblioteca.gestionB.api.dto.response.RelationsDTO.RelationsBoo
 import com.gestionBiblioteca.gestionB.infrastructure.abstract_services.IBookService;
 import com.gestionBiblioteca.gestionB.utils.enums.SortType;
 
+import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -26,9 +27,9 @@ public class Bookcontroller {
   @Autowired
   private IBookService bookSerivice;
 
-  @ApiResponse(responseCode = "400", description = "It was not possible to send the information", content = {
+  @Operation(summary = "Create Books", description = "TEST")
+  @ApiResponse(responseCode = "400", description = "When the request is not valid", content = {
       @Content(mediaType = "application/json", schema = @Schema(implementation = ErrorResponse.class)) })
-
   @PostMapping
   public ResponseEntity<RelationsBookResponse> create(
       @Validated @RequestBody BookRQ bookRQ) {
@@ -36,8 +37,7 @@ public class Bookcontroller {
     return ResponseEntity.ok(bookSerivice.create(bookRQ));
   }
 
-  @ApiResponse(responseCode = "400", description = "It was not possible to send the information", content = {
-      @Content(mediaType = "application/json", schema = @Schema(implementation = ErrorResponse.class)) })
+  @Operation(summary = "Get All Books", description = "TEST")
   @GetMapping
   public ResponseEntity<Page<RelationsBookResponse>> getAll(
       @Validated @RequestParam(defaultValue = "1") int page,
@@ -49,7 +49,8 @@ public class Bookcontroller {
     return ResponseEntity.ok(bookSerivice.getAll(page - 1, size, sortType));
   }
 
-  @ApiResponse(responseCode = "400", description = "It was not possible to send the information", content = {
+  @Operation(summary = "Get Book", description = "TEST")
+  @ApiResponse(responseCode = "400", description = "When the id is not valid", content = {
       @Content(mediaType = "application/json", schema = @Schema(implementation = ErrorResponse.class)) })
   @GetMapping(path = "/{id}")
   public ResponseEntity<RelationsBookResponse> getById(
@@ -58,7 +59,8 @@ public class Bookcontroller {
     return ResponseEntity.ok(this.bookSerivice.get(id));
   }
 
-  @ApiResponse(responseCode = "400", description = "It was not possible to update the information", content = {
+  @Operation(summary = "Update Book", description = "TEST")
+  @ApiResponse(responseCode = "400", description = "When the id is not valid", content = {
       @Content(mediaType = "application/json", schema = @Schema(implementation = ErrorResponse.class)) })
   @PutMapping(path = "/{id}")
   public ResponseEntity<RelationsBookResponse> update(
@@ -68,14 +70,13 @@ public class Bookcontroller {
     return ResponseEntity.ok(this.bookSerivice.update(bookRQ, id));
   }
 
-  @ApiResponse(responseCode = "400", description = "It was not possible to delete the information", content = {
+  @Operation(summary = "Delete Book", description = "TEST")
+  @ApiResponse(responseCode = "400", description = "When the id is not valid", content = {
       @Content(mediaType = "application/json", schema = @Schema(implementation = ErrorResponse.class)) })
   @DeleteMapping(path = "/{id}")
   public ResponseEntity<RelationsBookResponse> delete(
       @Validated @PathVariable Long id) {
-
     this.bookSerivice.delete(id);
-
     return ResponseEntity.noContent().build();
   }
 
